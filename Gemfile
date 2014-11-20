@@ -12,5 +12,13 @@ gem 'spring',        group: :development
 gem "slim-rails"
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'sass-rails', '>= 3.2'
-
+gem "simple_form", github: "plataformatec/simple_form"
+gem "faker"
 gem 'devise'
+
+group :test, :development do
+  gem 'factory_girl_rails'
+  gem "rspec-rails"
+  gem "capybara"
+  gem "launchy"
+end
