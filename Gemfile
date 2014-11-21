@@ -15,6 +15,8 @@ gem 'sass-rails', '>= 3.2'
 gem "simple_form", github: "plataformatec/simple_form"
 gem "faker"
 gem 'devise'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'tesseract'
 
 group :test, :development do
   gem 'factory_girl_rails'
@@ -22,3 +24,5 @@ group :test, :development do
   gem "capybara"
   gem "launchy"
 end
+
+gem 'rails_12factor', group: :production
