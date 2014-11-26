@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'dotenv-rails',        group: :development
 gem 'rails', '4.1.7'
 gem 'pg'
 gem 'uglifier', '>= 1.3.0'
@@ -19,6 +20,9 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'tesseract-ocr'
 gem 'carrierwave'
 gem 'virtus'
+gem "geocoder"
+gem 'gmaps4rails'
+gem 'underscore-rails'
 
 group :test, :development do
   gem 'factory_girl_rails'

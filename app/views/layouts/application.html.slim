@@ -7,10 +7,23 @@ html
     = csrf_meta_tags
 
   body
-    - if flash[:notice]
-      .alert.alert-success= flash[:notice]
-    - elsif flash[:alert]
-      .alert.alert-danger= flash[:alert]
 
-    = yield
+    nav.navbar.navbar-default role="navigation"
+      .container-fluid
+        .navbar-header
+          = link_to "Parking Project", root_path, class: "navbar-brand"
+        ul.nav.navbar-nav.navbar-right
+          - if user_signed_in?
+            li= link_to current_user.first_name, edit_user_registration_path
+            li= link_to "Sign Out", destroy_user_session_path, method: :delete
+          - else
+            li= link_to "Sign In", new_user_session_path
+
+    .container
+      - if flash[:notice]
+        .alert.alert-success= flash[:notice]
+      - elsif flash[:alert]
+        .alert.alert-danger= flash[:alert]
+
+      = yield
 
