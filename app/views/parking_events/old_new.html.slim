@@ -1,0 +1,9 @@
+= form_tag(parking_events_path, method: "post") do 
+  .form-group
+    = label_tag :photo, "Photo"
+    = file_field_tag :photo
+  .form-group
+    = label_tag :lot_id, "Lot ID"
+    = text_field_tag :lot_id
+
+  = submit_tag "Submit"

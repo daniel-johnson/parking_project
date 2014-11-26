@@ -1,0 +1,12 @@
+= form_for @parking_event do |f|
+  .form-group
+    = f.label :photo_in
+    = f.file_field :photo_in
+  .form-group
+    = f.label :lot_id
+    = f.text_field :lot_id
+  .form-group
+    = f.label :time_in
+    = f.datetime_select :time_in
+
+  = f.submit class: "btn btn-primary btn-jumbo"

@@ -16,13 +16,16 @@ gem "simple_form", github: "plataformatec/simple_form"
 gem "faker"
 gem 'devise'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
-gem 'tesseract'
+gem 'tesseract-ocr'
+gem 'carrierwave'
+gem 'virtus'
 
 group :test, :development do
   gem 'factory_girl_rails'
-  gem "rspec-rails"
-  gem "capybara"
-  gem "launchy"
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'pry-rails'
 end
 
 gem 'rails_12factor', group: :production
