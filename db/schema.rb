@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126035502) do
+ActiveRecord::Schema.define(version: 20141130010727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20141126035502) do
     t.float    "longitude"
     t.string   "address"
   end
+
+  add_index "lots", ["address"], name: "index_lots_on_address", using: :btree
+  add_index "lots", ["capacity"], name: "index_lots_on_capacity", using: :btree
+  add_index "lots", ["latitude"], name: "index_lots_on_latitude", using: :btree
+  add_index "lots", ["longitude"], name: "index_lots_on_longitude", using: :btree
+  add_index "lots", ["rate"], name: "index_lots_on_rate", using: :btree
 
   create_table "parking_events", force: true do |t|
     t.datetime "time_in"
