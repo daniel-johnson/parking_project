@@ -5,10 +5,9 @@ class RegistrationsController < Devise::RegistrationsController
     @user = resource
     service = Registration::CreateWithStripe.new(user: @user, stripe_token: params[:user][:customer_id])
     if service.call
-      resource.customer_id = @user.customer_id
+      resource = @user
       resource_saved = resource.save
     else
-      binding.pry
       @error_message = "Sorry! The transaction was not completed."
       return render :new
     end

@@ -36,7 +36,6 @@ group :development do
   gem "hirb"
   gem "interactive_editor"
   gem "awesome_print"
-  gem "pry-rails"
   gem 'spring'
   gem 'pry'
 end

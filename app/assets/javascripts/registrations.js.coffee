@@ -2,21 +2,35 @@ $ ->
   return if typeof(Stripe) == "undefined"
   Stripe.setPublishableKey($("meta[name=stripe-key]").attr("content"))
 
-  $("#cc-form").on "submit", -> 
+  $form = $('#token-form')
+  $hiddenStripeField = $("#user_customer_id")
+
+  getStripeToken = ->
     $("#stripe-errors").html ""
     $("input[type=submit]").prop "disabled", true
     card =  
-      number: $("#_card_number").val()
-      cvc: $("#_cvc").val()
+      number: $("#user_card_number").val()
+      cvc: $("#user_cvc").val()
       expMonth: $("#date_month").val()
       expYear: $("#date_year").val()
     Stripe.createToken card, handleStripeResponse
-    return false
+
+  disableCreditCardInfoFields = ->
+    $("#_card_number").remove()
+    $("#_cvc").remove()
+    $("#date_month").remove()
+    $("#date_year").remove()
 
   handleStripeResponse = (status, response) ->
     if status == 200
-      $("#user_customer_id").val response.id
-      $("#token-form").submit()
+      $hiddenStripeField.val(response.id)
+      disableCreditCardInfoFields()
+      $form.submit()
     else
       $("#stripe-errors").html response.error.message
       $("input[type=submit]").prop "disabled", false
+
+  $form.on "submit", (e) -> 
+    if $hiddenStripeField.val() == ''
+      e.preventDefault()
+      getStripeToken()

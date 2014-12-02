@@ -12,6 +12,9 @@ class Registration::CreateWithStripe
         card: stripe_token
       )
       user.customer_id = @customer.id
+      user.last_4 = @customer.cards.data[0].last4
+      user.exp_month = @customer.cards.data[0].exp_month
+      user.exp_year = @customer.cards.data[0].exp_year
       return true
     rescue => e
       Rails.logger.error ">>>>>>>>>>>>>>>> #{e.message}"
