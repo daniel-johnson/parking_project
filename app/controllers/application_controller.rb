@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << [:last_name]
     devise_parameter_sanitizer.for(:sign_up) << [:license]
     devise_parameter_sanitizer.for(:account_update) << [:license]
+    devise_parameter_sanitizer.for(:sign_up) << [:customer_id]
+    devise_parameter_sanitizer.for(:account_update) << [:customer_id]
 
   end
 end

@@ -9,7 +9,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'spring',        group: :development
 gem "slim-rails"
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'sass-rails', '>= 3.2'
@@ -23,6 +22,7 @@ gem 'virtus'
 gem "geocoder"
 gem 'gmaps4rails'
 gem 'underscore-rails'
+gem "quiet_assets"
 
 group :test, :development do
   gem 'factory_girl_rails'
@@ -30,6 +30,15 @@ group :test, :development do
   gem 'capybara'
   gem 'launchy'
   gem 'pry-rails'
+end
+
+group :development do
+  gem "hirb"
+  gem "interactive_editor"
+  gem "awesome_print"
+  gem "pry-rails"
+  gem 'spring'
+  gem 'pry'
 end
 
 gem 'rails_12factor', group: :production

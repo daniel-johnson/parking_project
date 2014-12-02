@@ -3,23 +3,6 @@ h1 Parking Project
 div style='width: 80%;'
   #map style='width: 100%; height: 400px;'
 
-form#payment-form action="" method="POST" 
-  span.payment-errors
-  .form-row
-    label
-      span Card Number
-      input data-stripe="number" size="20" type="text" /
-  .form-row
-    label
-      span CVC
-      input data-stripe="cvc" size="4" type="text" /
-  .form-row
-    label
-      span Expiration (MM/YYYY)
-      input data-stripe="exp-month" size="2" type="text" /
-    span /
-    input data-stripe="exp-year" size="4" type="text" /
-  button type="submit"  Submit Payment
 
 javascript:
   handler = Gmaps.build('Google');
@@ -30,7 +13,7 @@ javascript:
           "lng": #{@lot.longitude},
           "infowindow": "Park forever!!"
         }
-        "infowindow": #{@lot.address}
+        //"infowindow": #{@lot.address}
       ]);
       handler.bounds.extendWith(markers);
       handler.fitMapToBounds();

@@ -11,7 +11,8 @@ class Stripe::CreateCustomer
         description: description,
         card: stripe_token
       )
-      save_users_stripe_info
+      user.customer_id  = @customer.id
+      user.save
     rescue => e
       Rails.logger.error ">>>>>>>>>>>>>>>> #{e.message}"
       false
@@ -21,14 +22,7 @@ class Stripe::CreateCustomer
   private
 
   def description
-    "Customer for #{user.full_name} | #{user.email}"
-  end
-
-  def save_users_stripe_info
-    user.stripe_customer_token  = @customer.id
-    user.stripe_last_4_digits   = @customer.cards.data[0].last4
-    user.stripe_card_type       = @customer.cards.data[0].brand
-    user.save
+    "Customer for #{user.full_name} | #{user.email} | #{user.license}"
   end
 
 end

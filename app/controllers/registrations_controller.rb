@@ -2,14 +2,23 @@ class RegistrationsController < Devise::RegistrationsController
   
   def create
     build_resource(sign_up_params)
-
-    resource_saved = resource.save
+    @user = resource
+    service = Registration::CreateWithStripe.new(user: @user, stripe_token: params[:user][:customer_id])
+    if service.call
+      resource.customer_id = @user.customer_id
+      resource_saved = resource.save
+    else
+      binding.pry
+      @error_message = "Sorry! The transaction was not completed."
+      return render :new
+    end
     yield resource if block_given?
     if resource_saved
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
+        
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
         expire_data_after_sign_in!
@@ -25,10 +34,4 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-
-  protected
-
-  def after_sign_up_path_for(resource)
-    '/an/example/path'
-  end
 end
