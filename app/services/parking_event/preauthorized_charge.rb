@@ -1,16 +1,15 @@
-class Stripe::ChargeCustomer
+class ParkingEvent::PreauthorizedCharge
 
   include Virtus.model
 
   attribute :parking_event, ParkingEvent
-  attribute :card,          String
 
   def call
     begin
       charge = Stripe::Charge.create(
                amount:      amount,
                currency:    "cad",
-               customer:    card,
+               customer:    parking_event.customer_id,
                description: description)
       parking_event.stripe_txn_id = charge.id
       parking_event.save

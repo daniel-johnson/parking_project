@@ -10,15 +10,14 @@ class ParkingEventsController < ApplicationController
     else
       @existing_event.time_out = @new_event.time_in
       @existing_event.photo_out = @new_event.photo_in
-      @existing_event.duration = @existing_event.time_out - @existing_event.time_in
-      @existing_event.save
-      service = ParkingEvent::PrepareCharge.new(:parking_event @existing_event)
-      if service.call
-        render nothing: true
-      else
-
+      @existing_event.populate_duration
+      
+      @user = User.where(license: @existing_event.license).first
+      if @user
+        @existing_event.user = @user
+        ParkingEvent::PreauthorizedCharge.new(parking_event: @existing_event).call
       end
-
+      render nothing: true
     end
   end
 
