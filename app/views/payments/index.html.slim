@@ -1,0 +1,22 @@
+h1 Total balance Owing Against #{@license}: #{number_to_currency (@total.round / 100)}
+
+= simple_form_for "", url: payments_path, html: {id: "token-form"} do |f|
+  = f.input :stripe_card_token, as: :hidden
+  = f.input :total, as: :hidden, input_html: { value: @total.round }
+  = f.input :license, as: :hidden, input_html: { value: @license }
+  = f.input :email, as: :hidden
+
+- if @total > 0
+  #stripe-errors= @error_message
+  = simple_form_for "", html: {id: "cc-form"} do |f|
+    = f.input :card_number
+    .form-group
+      = f.label :expiry_date
+      = select_month nil, {add_month_numbers: true}, {class: "form-control"}
+      = select_year nil, {start_year: Date.today.year, end_year: Date.today.year + 10}, {class: "form-control"}
+    = f.input :cvc
+    = f.input :email
+    noscript JavaScript must be enabled for this payment to make payment.
+    = f.button :submit, value: "Submit Payment", class: "btn btn-primary"
+- else
+  p No balance is owed against this license. Please click home link at the top left of the page to return to the homepage. 

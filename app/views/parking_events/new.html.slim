@@ -1,4 +1,4 @@
-= form_for @parking_event do |f|
+= form_for @parking_event, authenticity_token: false do |f|
   .form-group
     = f.label :photo_in
     = f.file_field :photo_in

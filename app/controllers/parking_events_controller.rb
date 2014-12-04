@@ -1,4 +1,6 @@
 class ParkingEventsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+
   def create
     @new_event = ParkingEvent.new parking_event_params
     @new_event.license = parse_license(parking_event_params[:photo_in].tempfile.path)
@@ -6,7 +8,7 @@ class ParkingEventsController < ApplicationController
 
     if @existing_event.nil?
       @new_event.save
-      render nothing: true
+      redirect_to new_parking_event_path, notice: "New Parking Event Created"
     else
       @existing_event.time_out = @new_event.time_in
       @existing_event.photo_out = @new_event.photo_in
@@ -17,7 +19,8 @@ class ParkingEventsController < ApplicationController
         @existing_event.user = @user
         ParkingEvent::PreauthorizedCharge.new(parking_event: @existing_event).call
       end
-      render nothing: true
+      @existing_event.save
+      redirect_to new_parking_event_path, notice: "Existing Parking Event Populated"
     end
   end
 

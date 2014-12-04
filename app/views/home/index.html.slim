@@ -1,13 +1,31 @@
-h1 Parking Project
+h2 class='text-align: center' The Parking Project
+h2 class='text-align: center;' 
+  small A web appication for parking management
 
-div style='width: 80%;'
-  #map style='width: 100%; height: 400px;'
+.row
+  .well
+    .bs-example
+      #map style='width: 100%; height: 400px;'
 
+.row
+  .col-md-6 id='front-div-right'
+    .well 
+      h4 To have your parking automatically paid for using your credit card, please
+      = button_to "Click here", new_user_registration_path, class: "btn btn-primary"
 
+  .col-md-6 id='front-div-left'
+    .well
+      h4 If you have already parked, please enter your license plate below.
+      = form_tag payments_path, method: :get
+        .form-group
+          = label_tag :license, "License Plate:"
+          = text_field_tag :license, nil, class: 'form-control'
+          br
+          = submit_tag "Search", class: "btn btn-primary"
 javascript:
   handler = Gmaps.build('Google');
     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-      markers = handler.addMarkers(#{raw @hash.to_json });
+      markers = handler.addMarkers(#{raw @hash.to_json});
       handler.bounds.extendWith(markers);
       handler.fitMapToBounds();
       handler.getMap().setZoom(12);
