@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'dotenv-rails',        group: :development
 gem 'rails', '4.1.7'
 gem 'pg'
