@@ -4,7 +4,6 @@ h1 Total balance Owing Against #{@license}: #{number_to_currency (@total.round /
   = f.input :stripe_card_token, as: :hidden
   = f.input :total, as: :hidden, input_html: { value: @total.round }
   = f.input :license, as: :hidden, input_html: { value: @license }
-  = f.input :email, as: :hidden
 
 - if @total > 0
   #stripe-errors= @error_message

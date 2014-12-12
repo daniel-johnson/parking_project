@@ -3,12 +3,15 @@ class ParkingEventsController < ApplicationController
 
   def create
     @new_event = ParkingEvent.new parking_event_params
+    @new_event.time_in ||= Time.now
+    @new_event.lot_id ||= 1
     @new_event.license = parse_license(parking_event_params[:photo_in].tempfile.path)
     @existing_event = unresolved_parking_events(@new_event).first
 
     if @existing_event.nil?
       @new_event.save
-      redirect_to new_parking_event_path, notice: "New Parking Event Created"
+      # redirect_to new_parking_event_path, notice: "New Parking Event Created"
+      render nothing: true
     else
       @existing_event.time_out = @new_event.time_in
       @existing_event.photo_out = @new_event.photo_in
@@ -20,7 +23,8 @@ class ParkingEventsController < ApplicationController
         ParkingEvent::PreauthorizedCharge.new(parking_event: @existing_event).call
       end
       @existing_event.save
-      redirect_to new_parking_event_path, notice: "Existing Parking Event Populated"
+      # redirect_to new_parking_event_path, notice: "Existing Parking Event Populated"
+      render nothing: true
     end
   end
 

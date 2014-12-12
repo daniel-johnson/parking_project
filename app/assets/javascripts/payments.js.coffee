@@ -16,8 +16,7 @@ $ ->
   handleStripeResponse = (status, response) ->
     if status == 200
       $("#_stripe_card_token").val response.id
-      $("#token-form #_email").val $("#cc-form #_email").val()
-      $("cc-form#token-form").submit()
+      $("#token-form").submit()
     else
       $("#stripe-errors").html response.error.message
       $("input[type=submit]").prop "disabled", false

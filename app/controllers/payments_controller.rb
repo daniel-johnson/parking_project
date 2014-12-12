@@ -20,9 +20,9 @@ class PaymentsController < ApplicationController
       Payment::ChargeWithStripe.new(token:          params[:stripe_card_token],
                                     total:          params[:total],
                                     license:        params[:license],
-                                    parking_events: @parking_events ).call
+                                    parking_events: @parking_events).call
       #email receipt
-      redirect_to root_path, notice: "Thank you, your payment has been recei"
+      redirect_to root_path, notice: "Thank you, your payment has been received. An receipt has been emailed to you."
     else
       redirect_to root_path, alert: "Error, could not process request, please try again."
     end

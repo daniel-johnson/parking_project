@@ -11,7 +11,7 @@ h2 class='text-align: center;'
   .col-md-6 id='front-div-right'
     .well 
       h4 To have your parking automatically paid for using your credit card, please
-      = button_to "Click here", new_user_registration_path, class: "btn btn-primary"
+      = link_to "Click here", new_user_registration_path, class: "btn btn-primary"
 
   .col-md-6 id='front-div-left'
     .well
@@ -28,5 +28,5 @@ javascript:
       markers = handler.addMarkers(#{raw @hash.to_json});
       handler.bounds.extendWith(markers);
       handler.fitMapToBounds();
-      handler.getMap().setZoom(12);
+      handler.getMap().setZoom(13);
     });

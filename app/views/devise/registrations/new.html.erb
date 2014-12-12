@@ -9,19 +9,16 @@
     <%= f.input :last_name, required: true %>
     <%= f.input :license, required: true %>
     <%= f.input :customer_id, as: :hidden %>
-  </div>
-  <noscript>JavaScript must be enabled for this form to work.</noscript>
-
-  <div id="stripe-errors"> <%= @error_message %> </div>
-  <div class="form-inputs">
+    <div id="stripe-errors"> <%= @error_message %> </div>
     <%= f.input :card_number %>
     <div class="form-group">
       <%= f.label :expiry_date %>
-        <%= select_month nil, {add_month_numbers: true}, {class: "form-control"} %>
-        <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year + 10}, {class: "form-control"} %>
+      <%= select_month nil, {add_month_numbers: true}, {class: "form-control"} %>
+      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year + 10}, {class: "form-control"} %>
     </div>
-      <%= f.input :cvc %>
+    <%= f.input :cvc %>
     <%= f.button :submit, value: "Submit", class: "btn btn-primary" %>
   </div>
+  <noscript>JavaScript must be enabled for this form to work.</noscript>
 <% end %>
 <%= render "devise/shared/links" %>
