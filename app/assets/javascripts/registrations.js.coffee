@@ -16,8 +16,8 @@ $ ->
     Stripe.createToken card, handleStripeResponse
 
   disableCreditCardInfoFields = ->
-    $("#_card_number").remove()
-    $("#_cvc").remove()
+    $("#user_card_number").remove()
+    $("#user_cvc").remove()
     $("#date_month").remove()
     $("#date_year").remove()
 

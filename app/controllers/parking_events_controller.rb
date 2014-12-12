@@ -10,8 +10,8 @@ class ParkingEventsController < ApplicationController
 
     if @existing_event.nil?
       @new_event.save
-      # redirect_to new_parking_event_path, notice: "New Parking Event Created"
-      render nothing: true
+      redirect_to new_parking_event_path, notice: "New Parking Event Created"
+      # render nothing: true
     else
       @existing_event.time_out = @new_event.time_in
       @existing_event.photo_out = @new_event.photo_in
@@ -23,8 +23,8 @@ class ParkingEventsController < ApplicationController
         ParkingEvent::PreauthorizedCharge.new(parking_event: @existing_event).call
       end
       @existing_event.save
-      # redirect_to new_parking_event_path, notice: "Existing Parking Event Populated"
-      render nothing: true
+      redirect_to new_parking_event_path, notice: "Existing Parking Event Populated"
+      # render nothing: true
     end
   end
 
