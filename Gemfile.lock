@@ -31,6 +31,8 @@ GEM
       activesupport (= 4.1.7)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_model_serializers (0.9.0)
+      activemodel (>= 3.2)
     activemodel (4.1.7)
       activesupport (= 4.1.7)
       builder (~> 3.1)
@@ -45,6 +47,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
+    angularjs-rails (1.3.2)
     arel (5.0.1.20140414130214)
     awesome_print (1.2.0)
     axiom-types (0.1.1)
@@ -132,6 +135,7 @@ GEM
     minitest (5.4.3)
     multi_json (1.10.1)
     netrc (0.8.0)
+    ng-rails-csrf (0.1.0)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
@@ -253,6 +257,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
+  angularjs-rails
   awesome_print
   bootstrap-sass (~> 3.3.1)
   capybara
@@ -269,6 +275,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  ng-rails-csrf
   pg
   pry
   pry-rails

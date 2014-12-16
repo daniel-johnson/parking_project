@@ -2,10 +2,8 @@ class ParkingEventsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-    @new_event = ParkingEvent.new parking_event_params
-    @new_event.time_in ||= Time.now
-    @new_event.lot_id ||= 1
-    @new_event.license = parse_license(parking_event_params[:photo_in].tempfile.path)
+    populate_new_event
+    
     @existing_event = unresolved_parking_events(@new_event).first
 
     if @existing_event.nil?
@@ -50,5 +48,12 @@ class ParkingEventsController < ApplicationController
   def unresolved_parking_events(parking_event)
     ParkingEvent.where(photo_out: nil).where(["lot_id = ? and license = ?", @new_event.lot_id, @new_event.license])
     # ParkingEvent.where(["lot_id = ? and photo_out = ? and license = ?", "#{parking_event.lot_id}", nil, "#{parking_event.license}"])
+  end
+
+  def populate_new_event
+    @new_event = ParkingEvent.new parking_event_params
+    @new_event.time_in ||= Time.now
+    @new_event.lot_id ||= 1
+    @new_event.license = parse_license(parking_event_params[:photo_in].tempfile.path)
   end
 end

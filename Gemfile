@@ -24,6 +24,10 @@ gem 'gmaps4rails'
 gem 'underscore-rails'
 gem "quiet_assets"
 
+gem 'active_model_serializers'
+gem 'angularjs-rails'
+gem 'ng-rails-csrf'
+
 group :test, :development do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
