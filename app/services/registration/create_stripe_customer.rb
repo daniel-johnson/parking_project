@@ -1,4 +1,4 @@
-class Registration::CreateWithStripe
+class Registration::CreateStripeCustomer
 
   include Virtus.model
 

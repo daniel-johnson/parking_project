@@ -17,7 +17,7 @@ class PaymentsController < ApplicationController
       @confirm_total += parking_event.duration * parking_event.lot_rate
     end
     if params[:total].to_i == @confirm_total.round
-      Payment::ChargeWithStripe.new(token:          params[:stripe_card_token],
+      Payment::ChargeStripeToken.new(token:          params[:stripe_card_token],
                                     total:          params[:total],
                                     license:        params[:license],
                                     parking_events: @parking_events).call

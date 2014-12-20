@@ -1,4 +1,4 @@
-class ParkingEvent::PreauthorizedCharge
+class ParkingEvent::ChargeStripeCustomer
 
   include Virtus.model
 

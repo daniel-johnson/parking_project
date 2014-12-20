@@ -1,4 +1,4 @@
-class Payment::ChargeWithStripe
+class Payment::ChargeStripeToken
 
   include Virtus.model
 

@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     @user = resource
-    service = Registration::CreateWithStripe.new(user: @user, stripe_token: params[:user][:customer_id])
+    service = Registration::CreateStripeCustomer.new(user: @user, stripe_token: params[:user][:customer_id])
     if service.call
       resource = @user
       resource_saved = resource.save

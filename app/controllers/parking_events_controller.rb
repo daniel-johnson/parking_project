@@ -18,7 +18,7 @@ class ParkingEventsController < ApplicationController
       @user = User.where(license: @existing_event.license).first
       if @user
         @existing_event.user = @user
-        ParkingEvent::PreauthorizedCharge.new(parking_event: @existing_event).call
+        ParkingEvent::ChargeStripeCustomer.new(parking_event: @existing_event).call
       end
       @existing_event.save
       redirect_to new_parking_event_path, notice: "Existing Parking Event Populated"
